@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="Gradient"         
+             xmlns:Custome="clr-namespace:SpeechRecg.Mobile.CustomRenderer"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="SpeechRecg.Mobile.Pages.Speech2TextPage">
+    <ContentPage.Content>
+        <Grid>
+        <ScrollView>
+            <StackLayout Margin="0" Padding="10" Spacing="20">
+                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="10">
+                    <Image Source="Logo" HeightRequest="32" WidthRequest="32"/>
+                    <Label FontFamily="{StaticResource SegoeUI_Black}"
+                       Text="Speech To Text" TextColor="White" VerticalOptions="End"
+                       FontSize="Title" FontAttributes="Bold"/>
+                </StackLayout>
+                <Grid Padding="0" Margin="10,20,10,10" RowSpacing="0"
+                      HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding IsDownloded}" Value="False">
+                            <Setter Property="Margin" Value="10,20,10,75"/>
+                        </DataTrigger>
+                    </Grid.Triggers>
+                    <Frame Grid.Row="0" Grid.RowSpan="2" 
+                           CornerRadius="5" HasShadow="True" BorderColor="#0F000000" 
+                           BackgroundColor="White" Padding="0" Margin="0"
+                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Custome:CustomEditor FontFamily="{StaticResource SegoeUI_SemiBold}" FontSize="15"
+                                Placeholder="اكتب ما تسمعه هنا"
+                                Text="{Binding Text}"
+                                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                Keyboard="Text" Margin="10,10,10,30"/>
+                    </Frame>
+                    <!-- Buttons -->
+                    <Grid Grid.Row="1" Grid.RowSpan="2" 
+                          Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <!-- Stop Buttons-->
+                        <ImageButton Source="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf04d;', Color=#E82236}" 
+                            BackgroundColor="White" CornerRadius="28" Padding="18" Margin="0"
+                            HeightRequest="56" WidthRequest="56"
+                            BorderColor="#0F000000" BorderWidth="0.5"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                            android:Button.UseDefaultShadow="true"
+                            Clicked="StopAudioFile">
+                            <ImageButton.Triggers>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding IsPlaying }" Value="True">
+                                    <Setter Property="TranslationX" Value="+45"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding IsPlaying }" Value="False">
+                                    <Setter Property="TranslationX" Value="0"/>
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+
+                        <!-- Cancel Opration Download Buttons-->
+                        <ImageButton Source="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf01e;', Color=#FF1A4A}" 
+                            BackgroundColor="White" CornerRadius="27" Padding="18" Margin="0"
+                            HeightRequest="54" WidthRequest="54"
+                            BorderColor="#0F000000" BorderWidth="0.5"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                            android:Button.UseDefaultShadow="true"
+                            Clicked="CancelOprationAudioFile">
+                            <ImageButton.Triggers>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding AudioIsPrepared }" Value="True">
+                                    <Setter Property="TranslationX" Value="-45"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding AudioIsPrepared }" Value="False">
+                                    <Setter Property="TranslationX" Value="0"/>
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+
+                        <!-- Main Buttons-->
+                        <ImageButton Source="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf04b;', Color=#59CBB7,Size=5}" 
+                            BackgroundColor="White" CornerRadius="32" Padding="20" Margin="0"
+                            HeightRequest="64" WidthRequest="64" 
+                            BorderColor="#0F000000" BorderWidth="0.5"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                            android:Button.UseDefaultShadow="true"
+                            Clicked="MainButton">
+                            <ImageButton.Triggers>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <!--Download Button-->
+                                    <MultiTrigger.Conditions >
+                                        <BindingCondition Binding="{Binding IsPlaying }" Value="False"/>
+                                        <BindingCondition Binding="{Binding IsDownloded }" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Source" Value="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf381;', Color=#008AFC}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger TargetType="ImageButton">
+                                    <!--Play Button-->
+                                    <MultiTrigger.Conditions >
+                                        <BindingCondition Binding="{Binding IsPlaying }" Value="False"/>
+                                        <BindingCondition Binding="{Binding IsDownloded }" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Source" Value="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf04b;', Color=#34B452}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger TargetType="ImageButton">
+                                    <!--Pause Button-->
+                                    <MultiTrigger.Conditions >
+                                        <BindingCondition Binding="{Binding IsPlaying }" Value="True"/>
+                                        <BindingCondition Binding="{Binding IsDownloded }" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Source" Value="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf04c;', Color=#D83F4E}"/>
+                                </MultiTrigger>
+                            </ImageButton.Triggers>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                        <BoxView 
+                            Color="LightGray"  Margin="0"
+                            IsVisible="{Binding AudioIsPrepared}"
+                            HeightRequest="64" WidthRequest="64" CornerRadius="32"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                        <ActivityIndicator IsRunning="True"
+                            Color="Gray" Margin="0"
+                            IsVisible="{Binding AudioIsPrepared}"
+                            HeightRequest="64" WidthRequest="64"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                    </Grid>
+                </Grid>
+                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="10"
+                             HorizontalOptions="FillAndExpand" VerticalOptions="End"
+                             IsVisible="{Binding IsDownloded}">
+                    <Button Text="Skip" TextColor="White" 
+                            VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                            BackgroundColor="#EE5E68" CornerRadius="5"
+                            Clicked="SkipButton"/>
+                    <Button Text="Submit" TextColor="White" 
+                            VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                            BackgroundColor="#008AFC" CornerRadius="5"
+                            Clicked="SubmitButton"/>
+                </StackLayout>
+            </StackLayout>
+            </ScrollView>
+            <ContentView IsVisible="{Binding IsBusy}" BackgroundColor="#828282" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ActivityIndicator IsRunning="True" Color="#1877F2" Margin="20"
+                                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

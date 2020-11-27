@@ -1,0 +1,68 @@
+﻿
+@inherits LayoutComponentBase
+@inject NavigationManager nav
+@inject IJSRuntime js
+
+ <div class="main" style="background: linear-gradient(225deg, rgba(11,117,178,1) 0%, rgba(14,45,122,1) 100%);">
+                <div class="content px-4">
+                    <div class="container-login100">
+                        <div class="wrap-login100">
+                            <div class="login100-more login100-flex " style="">
+                                <div class="button_tappage" style="justify-items:baseline">
+                                    <button id="STT" style="width: 110%; text-align:center;" class="login100-form-btn1"
+                                            @onclick="NavToSTT">
+                                        STT
+                                    </button>
+
+                                    <button id="TTS" style="width: 110%;" class="login100-form-btn1"
+                                            @onclick="NavToTTS">
+                                        TTS
+                                    </button>
+                                </div>
+                                <p class="data_collection_system text_vertical" style="padding: 5px 2.5rem 5px 0px; margin-top: 15px;">
+                                    Data Collection System
+                                </p>
+                            </div>
+                            <div class="text-box-container" style="width: 83%; z-index: 1; padding: 2%;">
+                                @Body
+                            </div>
+                            <img src="WebImages/Logo.png" class="logo rightpane">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+@code
+{
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            CheckAuth();
+            if (nav.Uri.Split('/').Last().ToLower() == "Speech2Text".ToLower())
+                js.InvokeVoidAsync("selectpage", "STT", "TTS");
+            else if (nav.Uri.Split('/').Last().ToLower() == "Text2Speech".ToLower())
+                js.InvokeVoidAsync("selectpage", "TTS", "STT");
+        }
+        base.OnAfterRender(firstRender);
+    }
+    async void CheckAuth()
+    {
+        var token = await js.InvokeAsync<string>("wasmHelper.getAccessToken");
+        if (string.IsNullOrEmpty(token))
+        {
+            nav.NavigateTo("/Login");
+        }
+    }
+    void NavToSTT()
+    {
+        nav.NavigateTo("/Speech2Text");
+        js.InvokeVoidAsync("selectpage", "STT", "TTS");
+    }
+    void NavToTTS()
+    {
+        nav.NavigateTo("/Text2Speech");
+        js.InvokeVoidAsync("selectpage", "TTS", "STT");
+    }
+}

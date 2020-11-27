@@ -1,0 +1,1048 @@
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+@font-face {
+    font-family: 'segoeui';
+    src: url('../fonts/segui.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'segoeui_italic';
+    src: url('../fonts/seguital.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'segoeui_bold';
+    src: url('../fonts/segbold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'segoeui_bold_italic';
+    src: url('../fonts/seguiboldital.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'segoeui_black';
+    src: url('../fonts/seguiblack.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'segoeui_semibold';
+    src: url('../fonts/seguisemibold.ttf') format('truetype');
+}
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: auto;
+    font-family: segoeui;
+    background: linear-gradient(225deg, rgba(11,117,178,1) 0%, rgba(14,45,122,1) 100%);
+    background-size: cover;
+}
+.StopTranslation{
+    transform: translateX(0px)
+}
+.RunTranslation {
+    transform: translateX(45px)
+}
+/*---------------------------------------------*/
+a {
+    font-family: segoeui;
+    font-size: 14px;
+    line-height: 1.7;
+    color: white;
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+    a:focus {
+        outline: none !important;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: #333333;
+    }
+
+/*---------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+p {
+    font-family: segoeui;
+    line-height: 1.4;
+    color: #fff;
+}
+
+
+
+/*---------------------------------------------*/
+input {
+    outline: none;
+    border: none;
+}
+
+    input::-webkit-input-placeholder {
+        color: #999999;
+    }
+
+    input:-moz-placeholder {
+        color: #999999;
+    }
+
+    input::-moz-placeholder {
+        color: #999999;
+    }
+
+    input:-ms-input-placeholder {
+        color: #999999;
+    }
+
+
+button:hover {
+    cursor: pointer;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+    margin: 0 auto;
+}
+
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0px;
+}
+
+.wrap-login100 {
+    width: 80%;
+    height: 60%;
+    background: #fff;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    flex-direction: row;
+    margin: 0;
+    padding: 0px;
+}
+
+button:focus {
+    outline: 0;
+}
+.text_vertical {
+    writing-mode: vertical-lr;
+}
+/*==================================================================
+[ login more ]*/
+.leftpane {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border-collapse: collapse;
+}
+
+.middlepane {
+    width: 42%;
+    height: 100%;
+    float: left;
+    border-collapse: collapse;
+}
+
+.rightpane {
+    width: 6%;
+    height: 100%;
+    position: relative;
+    float: right;
+    margin-left: auto;
+    border-collapse: collapse;
+}
+
+.login100-more {
+    background: linear-gradient(225deg, rgba(11,117,178,1) 0%, rgba(14,45,122,1) 100%);
+    
+    z-index: 1;
+    width: 48.5%;
+    padding: 10px 0px 10px 20px;
+    margin: 0;
+    text-align-last: left;
+    text-transform: capitalize;
+}
+.login100-flex {
+    flex: 0;
+}
+
+
+
+
+/*==================================================================
+[ Form ]*/
+
+.login100-form {
+    flex: 1 1 auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+    z-index: 3;
+    padding: 20px 20px;
+}
+
+.login100-form-title {
+    font-family: segoeui_black;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    display: block;
+    color: #005297;
+    padding: 20px;
+}
+
+
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    border: 1px solid #e6e6e6;
+}
+
+.rs1-wrap-input100,
+.rs2-wrap-input100 {
+    width: 50%;
+}
+
+.rs2-wrap-input100 {
+    border-left: none;
+}
+
+
+.input100 {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: segoeui_bold;
+    font-size: 18px;
+    color: #666666;
+    line-height: 1.2;
+    padding: 0 25px;
+}
+
+input.input100 {
+    height: 55px;
+}
+
+/*---------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding-left: 2.5rem;
+}
+
+.login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    background: #008AFC;
+    font-family: segoeui_semibold;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    border-radius: 12px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+
+.login100-form-btn1 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: right;
+    float: right;
+    padding: 10px;
+    border: unset;
+    background-color: transparent;
+    font-family: segoeui_bold;
+    color: #fff;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    width: 35%;
+    border-radius: 0.50rem;
+}
+input[type="email"] {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+input[type="text"] {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+.inputWithIcon {
+    position: relative;
+}
+.inputWithIcon input[type="email"] {
+    padding-left: 40px;
+}
+.inputWithIcon input[type="text"] {
+    padding-left: 40px;
+}
+
+.inputWithIcon i {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.inputWithIcon.inputIconBg i {
+    background-color: #aaa;
+    color: #fff;
+    padding: 9px 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.round {
+    position: relative;
+}
+
+.round label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    cursor: pointer;
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 24px;
+}
+
+.round label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 5px;
+    position: absolute;
+    top: 6px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+select {
+    background-color: #EFEEEC;
+    width: auto;
+    padding: 3px;
+    margin: 0;
+    font-size: 100%;
+    padding: 5px 10px 5px 10px;
+    font-family: segoeui_semibold;
+    border: 0;
+    border: 1px solid #EFEEEC;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.button_tappage {
+    justify-items: self-end;
+    display: grid;
+    margin: 0px -10px 0px 0;
+ 
+}
+
+.round input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+    background-color: #008AFC;
+    border-color: #008AFC;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.gendar {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 40px 30px 40px;
+}
+
+
+/*-------------- STT STYLE------------------------*/
+.speech {
+    width: 80%;
+    height: 60%;
+    padding: 10px;
+   
+    margin:60px;
+}
+.textarea-style {
+    height: 130%;
+    border-radius: 5px;
+    width: 50%;
+    padding: 10px;
+    text-align-last: right;
+}
+
+.btn1 {
+    text-align: left;
+}
+
+.methods {
+    border: unset;
+    background-color: transparent;
+    color: white;
+    border-radius: 12px;
+    text-align: left;
+    width: 100px;
+    height: 30px;
+    margin-top: 15px;
+}
+
+    .methods:hover {
+        background-color: white;
+        color: #0E3580;
+        width: 100px;
+    }
+
+.rotattitle {
+    color: white;
+    padding-top: 130px;
+    font-weight: bold;
+    transform: rotate(90deg);
+    position: absolute;
+  text-align:center;
+    display: inline;
+    font-size:small;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.hear {
+    padding-top: 100px;
+}
+
+.skipbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: unset;
+    background-color: #757473;
+    color: #fff;
+    transition: all 0.4s;
+    width: 23%;
+    border-radius: 5px;
+    margin: 0 10px
+}
+.skipbtn1 {
+    background-color: #ED5E68;
+}
+.skipbtn2 {
+    background-color: #008AFC;
+}
+.skipbtn3 {
+    background-color: #8f8e8d;
+}
+.skipbtn4 {
+    background-color: #008AFC;
+    width:40%;
+}
+.success{
+    font-weight:bolder;
+    padding:10px;
+}
+.massageaftersub {
+    margin: 30px;
+}
+.massagetitle{
+    font-weight:bold;
+    color:rgba(14,45,122,1);
+}
+.box_blue {
+    position: relative;
+    float: right;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    justify-self: self-end;
+}
+.button_action {
+    background-color: white;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    position: absolute;
+    left: -2rem;
+}
+.button_action_small {
+    background-color: white;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    z-index: 1;
+    transform: translateX(45px);
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    position: absolute;
+    top: 5px;
+    left: -2rem;
+}
+.area_button {
+    margin-top: 33px;
+    height: 100px;
+    position: relative;
+}
+textarea {
+    resize: none;
+    width: 50%;
+}
+.play_button {
+    color: #34B452;
+    font-size: larger;
+}
+.content_title {
+    color: #0E3580;
+    font-size: xx-large;
+    font-weight: bolder;
+    padding-top: 20px;
+    background-color: white;
+    font-family: segoeui_bold;
+    
+}
+.div_content {
+    display: grid;
+    justify-items: center;
+    width: -webkit-fill-available;
+}
+.logo {
+}
+.welcome_to {
+    color: #537CAF;
+    text-align: left;
+    padding: 5px;
+    font-family: segoeui
+}
+
+.data_collection_system {
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+    padding: 5px;
+    font-family: segoeui_bold
+}
+
+.discrption {
+    font-size: 12px;
+    font-family: segoeui
+}
+.fram-register {
+}
+.data_form {
+    margin-left: 0px;
+}
+.entry_text {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-family: segoeui_bold
+}
+.usr_img {
+    width: 24px;
+    height: 24px;
+}
+.subtitle {
+    color: darkgray;
+    font-family: segoeui_semibold;
+    text-transform: uppercase;
+    padding-top: 0.5rem;
+}
+div select {
+    padding: 5px;
+    margin: 5px;
+}
+/*------------------------------------------------------------------
+[ Responsive ]*/
+@media (max-width: 1185px) {
+    .wrap-login100 {
+        width: auto;
+    }
+    .login100-form-btn1 {
+        font-size: x-large;
+        width:70%;
+    }
+   .login100-flex {
+        flex: 1 1 auto;
+    }
+    .login100-more {
+        background-color: rgba(0,82,151,1);
+        
+        z-index: 1;
+        width: 48.5%;
+        padding: 10px 20px;
+        margin: 0;
+        inline-size: -webkit-fill-available;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .button_tappage {
+        justify-items: self-end;
+        margin: 0px 25px -18.7px 0;
+        display: flex;
+    }
+    .text_vertical {
+        writing-mode: initial;
+    }
+    .content_title {
+        margin-bottom: 10px;
+        padding-top: 0;
+        font-size: larger;
+    }
+    .wrap-login100{
+        padding-bottom:10px;
+    }
+    .textarea-style {
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 563px) {
+    /*margin-bottom: 0rem;*/
+    .welcome_to {
+        color: #537CAF;
+        text-align: left;
+        padding: 5px;
+        font-family: segoeui;
+        font-size: x-large;
+    }
+
+
+    .data_collection_system {
+        text-align: left;
+        font-weight: bold;
+        padding: 5px;
+        font-family: segoeui_bold;
+        font-size: larger;
+    }
+
+    .discrption {
+        font-family: segoeui;
+        font-size: x-small;
+        margin-bottom: 0rem;
+    }
+
+    .box_blue {
+        position: relative;
+        float: right;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+        justify-self: self-end;
+    }
+
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .login100-form-btn1 {
+        display: flex;
+        font-size: small;
+        justify-content: right;
+        float: right;
+        padding: 10px;
+        border: unset;
+        background-color: transparent;
+        font-family: segoeui_bold;
+        color: #fff;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        width: 35%;
+        border-radius: 0.25rem;
+    }
+
+    .login100-form-title {
+        letter-spacing: 0px;
+        font-size: large;
+    }
+
+    .login100-more {
+        width: 100%;
+        height: auto;
+        inline-size: -webkit-fill-available;
+        display: flex;
+        flex:inherit;
+        flex-direction: column-reverse;
+    }
+
+
+    .text-box-container {
+        margin-right: auto;
+        margin-left: auto;
+        justify-items: left;
+    }
+
+    .gendar {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        width: 4rem;
+        margin: 10px 20px 30px 20px;
+    }
+}
+@media (max-width: 992px) {
+    .login100-form {
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+    .login100-more {
+        background-color: rgba(0,82,151,1);
+        flex: 1 1 auto;
+        z-index: 1;
+        width: 48.5%;
+        padding: 10px 20px;
+        margin: 0;
+        inline-size: -webkit-fill-available;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .button_tappage {
+        justify-items: self-end;
+        margin: 0px 25px -18.7px 0;
+        display: flex;
+        font-size: x-small
+    }
+
+    .gendar {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        /* font-size: 16px; */
+        cursor: pointer;
+        width: 3rem;
+        margin: 10px 5px 30px 5px;
+    }
+    textarea {
+        width: 80%;
+    }
+    .login100-form-btn1 {
+        font-size: large;
+    }
+   .fram-register {
+    }
+}
+@media (max-width: 500px) {
+    /*margin-bottom: 0rem;*/
+    .welcome_to {
+        color: #537CAF;
+        text-align: left;
+        padding: 5px;
+        font-family: segoeui;
+        font-size: small;
+    }
+    .massageaftersub {
+        width: 70%;
+    }
+    .massagetitle{
+        font-size:medium;
+    }
+    .data_collection_system {
+        text-align: left;
+        font-weight: bold;
+        /* padding: 5px; */
+        font-family: segoeui_bold;
+        font-size: medium;
+        margin: 0;
+    }
+
+    .discrption {
+        text-align: initial;
+        font-family: segoeui;
+        font-size: xx-small;
+        margin-bottom: 0rem;
+    }
+
+    .box_blue {
+        position: relative;
+        float: right;
+        width: 64px;
+        height: 64px;
+        margin: 5px;
+        justify-self: self-end;
+    }
+
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+    .container-login100-form-btn {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: left;
+        padding-left: 1.25rem;
+        font-size: medium;
+    }
+    .login100-form {
+        flex: 1 1 auto;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0px;
+        z-index: 3;
+        padding: 5px;
+    }
+    .login100-form-btn1 {
+        display: flex;
+        font-size: small;
+        justify-content: right;
+        float: right;
+        padding: 10px;
+        border: unset;
+        background-color: transparent;
+        font-family: segoeui_bold;
+        color: #fff;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        width: 35%;
+        border-radius: 0.25rem;
+    }
+
+    textarea {
+        width: 80%;
+    }
+
+    .login100-form-title {
+        letter-spacing: 0px;
+        font-size: medium;
+        padding: 10px;
+    }
+
+    .gendar {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        width: 4rem;
+        margin: 10px 20px 30px 20px;
+    }
+
+    .login100-more {
+        background-color: rgba(0,82,151,1);
+        flex: 1 1 auto;
+        z-index: 1;
+        width: 48.5%;
+        padding: 10px 20px;
+        margin: 0;
+        inline-size: -webkit-fill-available;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .button_tappage {
+        justify-items: self-end;
+        margin: 0px 25px -18.7px 0;
+        display: flex;
+        font-size: x-small
+    }
+
+    .fram-register {
+    }
+    input[type="text"] {
+        /* width: 100%; */
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 0;
+        outline: none;
+        padding: 4px;
+        box-sizing: border-box;
+        transition: 0.3s;
+    }
+    .inputWithIcon i {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        padding: 9px 8px;
+        color: #aaa;
+        transition: 0.3s;
+    }
+
+    .subtitle {
+        color: darkgray;
+        font-family: segoeui_semibold;
+        text-transform: uppercase;
+        padding-top: 0.5rem;
+        font-size: small;
+    }
+    div select {
+        padding: 5px;
+        margin: 5px;
+        font-size: small;
+    }
+    .content_title {
+        font-size:large;
+    }
+    .textarea-style {
+        width: 100%;
+    }
+    .skipbtn {
+        width: 50%;
+    }
+}
+@media (max-width: 321px) {
+    .gendar {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        width: 4rem;
+        margin: 10px 10px 30px 10px;
+    }
+
+    .container-login100-form-btn {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: left;
+        padding-left: 0.50rem;
+    }
+
+    textarea{
+        width:80%;
+    }
+
+    div select {
+        padding: 5px;
+        margin: 5px;
+        font-size: x-small;
+    }
+
+    .skipbtn {
+        width: 50%;
+        padding:5px;
+    }
+}
+
+*:focus {
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+    position: relative;
+}

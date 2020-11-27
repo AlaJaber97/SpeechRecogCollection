@@ -1,0 +1,10 @@
+﻿DROP TABLE [dbo].TransData
+DROP TABLE [dbo].TransText
+DROP TABLE [dbo].AudioFile
+DROP TABLE [dbo].AspNetUserClaims
+DROP TABLE [dbo].AspNetUserRoles
+DROP TABLE [dbo].AspNetRoleClaims
+DROP TABLE [dbo].AspNetUserLogins
+DROP TABLE [dbo].AspNetRoles
+DROP TABLE [dbo].AspNetUserTokens
+DROP TABLE [dbo].AspNetUsers

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="gradientStartColor">#0E3580</color>
+  <color name="gradientEndColor">#0B6EAE</color>
+  <color name="launcher_background">#FFFFFF</color>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="trans">#00000000</color>
+</resources>

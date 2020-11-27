@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundImageSource="Gradient"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="SpeechRecg.Mobile.Pages.StatusPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                     Margin="10" Padding="0" Spacing="40">
+            <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="10">
+                <Image Source="Logo" HeightRequest="32" WidthRequest="32"/>
+                <Label FontFamily="{StaticResource SegoeUI_Black}"
+                       Text="{Binding TitlePage}" TextColor="White" VerticalOptions="End"
+                       FontSize="Title" FontAttributes="Bold"/>
+            </StackLayout>
+            <Frame Margin="0" Padding="0"
+                   BackgroundColor="White"
+                   CornerRadius="10" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
+                        <Image Source="{Binding ImgStatus}" 
+                               HeightRequest="256" WidthRequest="256"/>
+                        <Label Text="{Binding TextStatus}" HorizontalTextAlignment="Center"
+                               FontSize="Large" TextColor="Black" 
+                               HorizontalOptions="CenterAndExpand"
+                               FontFamily="{StaticResource SegoeUI_SemiBold}"/>
+                        <Button Text="Try Again" Padding="0"  TextColor="White" 
+                                VerticalOptions="EndAndExpand"
+                                BackgroundColor="#008AFC" CornerRadius="10" Margin="20,0" 
+                                Clicked="TryAgainAction"/>
+                    </StackLayout>
+                </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

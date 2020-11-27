@@ -1,0 +1,158 @@
+﻿@layout MainLayout
+@page "/Register"
+@inject HttpClient client
+@inject NavigationManager nav
+@inject IJSRuntime js
+
+
+<div class="login100-form validate-form middlepane" style="display:block">
+
+    <h3 class="login100-form-title">REGISTER</h3>
+    <div class="container-login100-form-btn">
+        <div align="left" style="width: 100%;">
+            <label class="subtitle">Email:</label>
+            <div class="inputWithIcon">
+                <input type="email" @bind="Signup.Email" placeholder="you@example.com">
+                <i class="fas fa-user"></i>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(ErrorText))
+            {
+                <label style="color:red;">@ErrorText</label>
+            }
+        </div>
+        <div align="left">
+            <label class="subtitle">DATE OF BIRTHDAY :</label>
+            <div class="data_form row">
+                <select class="bear-dates" @bind="Day" name="day" id="day">
+                    <option value="DD" disabled="" selected="">Day</option>
+                    @for (int i = 1; i <= 31; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <select class="bear-months" @bind="Month" name="month" id="month">
+                    <option value="MM" disabled="" selected="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">Augast</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select class="bear-years" @bind="year" name="year" id="year">
+                    <option value="YYYY" disabled="" selected="">Year</option>
+                    @for (int i = DateTime.Now.Year; i > 1869; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div align="left">
+            <label class="subtitle">GENDER :</label>
+            <div style="flex-direction:row">
+                <img id="gril_gender" class="gendar" src="\WebImages\GrilGeneder_unactive.png"
+                     @onclick="() => SelectGender(true)" />  @*onclick="selectgender('female')"*@
+                    <img id="young_gender" class="gendar" src="\WebImages\YoungGeneder_active.png"
+                         @onclick="() => SelectGender(false)" />  @*onclick="selectgender('male')" *@
+                    </div>
+                </div>
+            </div>
+            <a class="login100-form-btn" @onclick="Submit" style="color:white; width: 90%; margin-left: 2.5rem;">
+                @if (IsBusy)
+                {
+                    <span class="spinner-border spinner-border-sm" style="font-size:large;" role="status" aria-hidden="true"></span>
+                }
+                else
+                {
+                    <span>Register</span>
+                }
+            </a>
+        </div>
+
+        @code {
+            //@inject Services.SessionAccesser Session
+            //@inject AuthenticationStateProvider AuthStateProvider
+            public BLL.Sql.Models.LoginAndRegister.Register Signup { get; set; }
+            public string Day { get; set; }
+            public string Month { get; set; }
+            public string year { get; set; }
+            public string ErrorText { get; set; }
+            public bool IsBusy { get; set; }
+            protected override void OnInitialized()
+            {
+                Signup = new BLL.Sql.Models.LoginAndRegister.Register();
+                base.OnInitialized();
+            }
+
+            void SelectGender(bool Gender)
+            {
+                try
+                {
+                    if (Gender)
+                    {
+                        Signup.Gender = BLL.Enum.Gender.Female;
+                        js.InvokeVoidAsync("selectgender", "female");
+                    }
+                    else
+                    {
+                        Signup.Gender = BLL.Enum.Gender.Male;
+                        js.InvokeVoidAsync("selectgender", "male");
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    ErrorText = ex.ToString();
+                    StateHasChanged();
+                }
+            }
+
+            async void Submit()
+            {
+                IsBusy = true;
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(Signup.Email))
+                    {
+                        Signup.Email = Signup.Email.Trim();
+                        string date = $"{Day}/{Month}/{year}";
+                        if (DateTime.TryParseExact(date, "d/MM/yyyy", new System.Globalization.CultureInfo("pt-BR"), System.Globalization.DateTimeStyles.None, out DateTime dateTime))
+                        {
+                            Signup.Birthday = dateTime;
+                            var response = await new BLL.Services.HttpExtension<BLL.Sql.Models.LoginAndRegister.Register>().PostReturnStatusCodeAndString("Account/Register", Signup, null);
+                            if (response.statusCode == System.Net.HttpStatusCode.OK)
+                            {
+                                var token = response.message;
+                                //Session.Set("Jwt", token);
+                                await js.InvokeAsync<string>("wasmHelper.saveAccessToken", token);
+                                //((Web.Services.CustomAuthenticationStateProvider)AuthStateProvider).MarkUserAsAuthenticated();
+                                nav.NavigateTo("/Speech2Text");
+                            }
+                        }
+                        else
+                        {
+                            ErrorText = "Select Correct Birthday";
+                        }
+                    }
+                    else
+                    {
+                        ErrorText = "this field is required";
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    ErrorText = ex.ToString();
+                }
+                IsBusy = false;
+                StateHasChanged();
+            }
+        }

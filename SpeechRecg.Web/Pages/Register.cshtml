@@ -1,0 +1,105 @@
+﻿@page "/Register"
+@model SpeechRecg.Web.Pages.RegisterModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="~/" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="WebImages/Logo.png" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/segoe-ui/Segoe UI.ttf">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body style="background: linear-gradient(225deg, rgba(11,117,178,1) 0%, rgba(14,45,122,1) 100%);">
+
+    <div class="limiter">
+        <div class="container-login100" style="  margin: 0; padding: 0px; ">
+            <div class="wrap-login100" style=" margin: 0px; padding: 0px; ">
+                <img src="WebImages/Logo.png" style="width: 60px; height: 60px; float: left; margin: 5px;">
+                <div>
+                <form class="login100-form validate-form" style=" margin: 0px; padding: 10px; ">
+                    <h3 class="login100-form-title " style="color: #0E3580; padding: 20px;">REGISTER</h3>
+                    <div class="container-login100-form-btn">
+                        <div class="input-group input-group-lg" style=" border-bottom: 3px solid rgba(255, 255, 255, 0.1);">
+                            <span class="input-group-addon" style="border: none; background: unset;">
+                                <img src="WebImages/user.png" style="width: 30px; height: 30px;">
+                            </span>
+                            <input style="border: unset; padding: 10px;" type="text" class="form-control" placeholder="Username or email" required="">
+
+                        </div>
+                    </div>
+                    <div class="form-row form-row-date">
+                        <div class="form-holder form-holder-2" style="padding: 20px;">
+                            <label class="special-label" style="padding: 10px; color: darkgray;">DATE OF BIRTHDAY :</label><br>
+                            <select name="day" id="day" style="padding: 5px; margin: 5px;">
+                                <option value="DD" disabled="" selected="">DD</option>
+                                @for (int i = 1; i <= 31; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <select name="month" id="month" style="padding: 5px; margin: 5px;">
+                                <option value="MM" disabled="" selected="">MM</option>
+                                <option value="Jan">January</option>
+                                <option value="Feb">February</option>
+                                <option value="Mar">March</option>
+                                <option value="Apr">April</option>
+                                <option value="May">May</option>
+                                <option value="Jun">June</option>
+                                <option value="July">July</option>
+                                <option value="Augast">Augast</option>
+                                <option value="Sep">September</option>
+                                <option value="Nov">November</option>
+                                <option value="Dec">December</option>
+
+                            </select>
+                            <select name="year" id="year" style="padding: 5px; margin: 5px;">
+                                <option value="YYYY" disabled="" selected="">YYYY</option>
+                                @for (int i = DateTime.Now.Year; i > 1869; i--)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="special-label" style="color: darkgray; display: block">GENDER :</label>
+                        <img id="gril_gender" class="gendar" src="\WebImages\GrilGeneder_unactive.png" onclick="selectgender('female')">
+                        <img id="young_gender" class="gendar" src="\WebImages\YoungGeneder_active.png" onclick="selectgender('male')">
+                    </div>
+
+                </form>
+                <button class="login100-form-btn">
+                    Register
+                </button><!-- second part-->
+                </div>
+                <div class="login100-more" style="background-color:rgba(0,82,151,1);width: 34.77%;margin: 0;padding-left: 110px;padding-top: 10px;">
+
+                    <button class="login100-form-btn1" href="/Login">
+                        LOGIN
+                    </button>
+
+                    <br><br>
+                    <button class="login100-form-btn1" href="#">
+                        REGISTER
+                    </button>
+                    <h2 style="color: #537CAF; text-align: left;padding: 5px;">Welcome to </h2>
+                    <p style="font-size: 30px;  text-align: left; font-weight: bold; padding: 5px;">Data Collection System </p>
+                    <p style="font-size: 12px; text-align: center;">can you join  to us and help to collection data to build our project </p>
+                    <img src="images/h.png" style="float: right; width: 200px; height: 200px; margin: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===============================================================================================-->
+    <script src="/js/RegisterJS.js"></script>
+
+</body>
+</html>

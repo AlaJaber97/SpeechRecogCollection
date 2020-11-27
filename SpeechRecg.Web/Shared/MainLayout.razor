@@ -1,0 +1,94 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager nav
+@inject IJSRuntime js
+
+
+<div class="main" style="background: linear-gradient(225deg, rgba(11,117,178,1) 0%, rgba(14,45,122,1) 100%);">
+    <div class="content px-4">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-more leftpane">
+                    <div class="button_tappage">
+                        <button id="LOGIN" class="login100-form-btn1"
+                                @onclick="NavToLoginPage">
+                            LOGIN
+                        </button>
+
+                        <button id="REGISTER" class="login100-form-btn1"
+                                @onclick="NavToRegisterPage">
+                            REGISTER
+                        </button>
+
+
+
+                    </div>
+                    <div style="display:grid" align="left">
+                        <h2 class="welcome_to">Welcome to</h2>
+                        <p class="data_collection_system">Data Collection System</p>
+                        <p class="discrption">can you join to us and help to collection data to build our project</p>
+                        <img src="WebImages/blue_box.svg" class="box_blue">
+                    </div>
+                </div>
+                @Body
+                <img src="WebImages/Logo.png" class="logo rightpane">
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+        //@inject Services.SessionAccesser session
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            CheckAuth();
+            if (nav.Uri.Split('/').Last().ToLower() == "LOGIN".ToLower() || nav.Uri.Split('/').Last() == "")
+                js.InvokeVoidAsync("selectpage", "LOGIN", "REGISTER");
+            else if (nav.Uri.Split('/').Last().ToLower() == "REGISTER".ToLower())
+                js.InvokeVoidAsync("selectpage", "REGISTER", "LOGIN");
+        }
+        base.OnAfterRender(firstRender);
+    }
+    void NavToLoginPage()
+    {
+        nav.NavigateTo("/login");
+        js.InvokeVoidAsync("selectpage", "LOGIN", "REGISTER");
+    }
+    void NavToRegisterPage()
+    {
+        nav.NavigateTo("/register");
+        js.InvokeVoidAsync("selectpage", "REGISTER", "LOGIN");
+    }
+    //[CascadingParameter]
+    //Task<AuthenticationState> authenticationStateTask { get; set; }
+    protected override void OnInitialized()
+    {
+        //if (!session.Check("Jwt"))
+        //    session.Set("Jwt", string.Empty);
+        //else
+        //    nav.NavigateTo("/Speech2Text");
+    }
+    async void CheckAuth()
+    {
+        var token = await js.InvokeAsync<string>("wasmHelper.getAccessToken");
+        Console.WriteLine("CheckAuth");
+        if (!string.IsNullOrEmpty(token))
+        {
+            nav.NavigateTo("/Speech2Text");
+        }
+
+        //    var authState = await authenticationStateTask;
+        //    var user = authState.User;
+        //    if (user.Identity.IsAuthenticated)
+        //    {
+        //        Console.WriteLine($"Hello, {user.Identity.Name}");
+        //        nav.NavigateTo("/Speech2Text");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("You're not logged in.");
+        //    }
+    }
+}

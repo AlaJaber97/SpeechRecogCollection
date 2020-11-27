@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:Pages="clr-namespace:SpeechRecg.Mobile.Pages"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            BarBackgroundColor="#0B70AF"
+            BackgroundImageSource="Gradient"
+            android:TabbedPage.IsSwipePagingEnabled="False"
+            android:TabbedPage.BarTextColor="White" 
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarItemColor="#343a40"
+            android:TabbedPage.BarSelectedItemColor="White"     
+            NavigationPage.HasNavigationBar="False"
+             x:Class="SpeechRecg.Mobile.Pages._TabbedPage">
+    <Pages:Speech2TextPage Title="Speech to Text" 
+                           IconImageSource="{FontImage FontFamily={StaticResource FontAwesomeBrands}, Glyph='&#xf1be;', Color=#FFFFFF}"/>
+    <Pages:Text2SpeechPage Title="Text to Speech" 
+                           IconImageSource="{FontImage FontFamily={StaticResource FontAwesomeSolid}, Glyph='&#xf3c9;', Color=#FFFFFF}"/>
+
+</TabbedPage>

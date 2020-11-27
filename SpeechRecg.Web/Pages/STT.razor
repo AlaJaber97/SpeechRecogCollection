@@ -1,0 +1,223 @@
+﻿@layout ContentLayout
+@page "/Speech2Text"
+@inject HttpClient client
+@inject IJSRuntime js
+@inject NavigationManager nav
+
+<h3 class="content_title">Speech To Text</h3>
+<input id="AudioFinished" type="checkbox" @onchange="@((e)=> { IsPlaying = false; StateHasChanged(); } )" hidden />
+<audio id="audio" style="display:none" />
+<div class="div_content">
+    <div class="div_content">
+        <textarea class="textarea-style" id="erasetext"
+                  @bind-value="@TextTrans" @bind-value:event="oninput"
+                  cols="40" rows="8" placeholder="اكتب ما تسمعه هنا" />
+        <div class="area_button">
+            <button class="button_action" @onclick="DoButton">
+                @if (IsDownloading || IsPreparing)
+                {
+                <span class="spinner-border spinner-border-sm"
+                      style="color:black; width:2rem; height:2rem" role="status" aria-hidden="true" />
+                }
+                else if (!IsDownloaded)
+                {
+                <i class="fas fa-cloud-download-alt" style="color: #008AFC;font-size: larger;" />
+                }
+                else
+                {
+                    if (!IsPlaying)
+                    {
+                <i class="fas fa-play" style="color: #34B452;font-size: larger;" />
+                    }
+                    else
+                    {
+                <i class="fas fa-pause" style="        color: #D83F4E;
+        font-size: larger;" />
+                    }
+                }
+            </button>
+            @if (IsDownloaded && IsPlaying && !IsPreparing && !IsDownloading)
+            {
+            <button class="button_action_small" id="show_hide_bt" @onclick="Stop">
+                <i class="fas fa-stop" style="color: #D83F4E;font-size: medium;" />
+            </button>
+            }
+        </div>
+    </div>
+    <div style="display: flex; width: 80%; justify-content: center;">
+        <button class="skipbtn skipbtn1" @onclick="Skip">Skip</button>
+        <button class="skipbtn skipbtn2" @onclick="Submit">Submit</button>
+    </div>
+</div>
+
+@code {
+    public bool IsDownloaded { get; set; }
+    public bool IsDownloading { get; set; }
+    public bool IsPlaying { get; set; }
+    public bool IsPreparing { get; set; }
+    public string TextTrans { get; set; }
+
+    public BLL.Sql.Models.AudioFile ModelAudioFile { get; set; }
+    public BLL.Sql.ViewModels.TransData TransData { get; set; }
+    public string Token { get; set; }
+    void InitializVariable()
+    {
+        IsDownloaded = false;
+        IsDownloading = false;
+        IsPlaying = false;
+        IsPreparing = false;
+        TextTrans = "";
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        InitializVariable();
+        ModelAudioFile = new BLL.Sql.Models.AudioFile();
+        TransData = new BLL.Sql.ViewModels.TransData();
+    }
+    public async void DoButton()
+    {
+        try
+        {
+            if (!IsDownloaded)
+                DownloadAudio();
+            else
+                PlayPause();
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        StateHasChanged();
+    }
+
+    private async void DownloadAudio()
+    {
+
+        try
+        {
+            IsDownloading = true;
+            //Download Audio file to cache memory
+            var Token = await js.InvokeAsync<string>("wasmHelper.getAccessToken");
+            var Response = await new BLL.Services.HttpExtension<BLL.Sql.Models.AudioFile>().GetReturnStatusCodeAndString("AudioFiles", Token);
+            if (Response.statusCode == System.Net.HttpStatusCode.OK)
+            {
+                ModelAudioFile = Response.body;
+                IsDownloaded = await js.InvokeAsync<bool>("load", ModelAudioFile.Path);
+            }
+            else if (Response.statusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                await js.InvokeAsync<string>("ShowAlert", "this email is not Unauthorized!!!");
+            }
+            else if (Response.statusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                await js.InvokeAsync<string>("ShowAlert", "no more audio file in database, can try Speech to Text mode");
+            }
+            else
+            {
+                await js.InvokeAsync<string>("ShowAlert", Response.message);
+            }
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        IsDownloading = false;
+        StateHasChanged();
+    }
+    protected async void PlayPause()
+    {
+        IsPreparing = true;
+        try
+        {
+            if (ModelAudioFile != null && !string.IsNullOrEmpty(ModelAudioFile.Path))
+            {
+                IsPlaying = await js.InvokeAsync<bool>("playpause");
+            }
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        IsPreparing = false;
+        StateHasChanged();
+    }
+    protected async void Stop()
+    {
+        try
+        {
+            IsPreparing = true;
+            if (ModelAudioFile != null && !string.IsNullOrEmpty(ModelAudioFile.Path))
+            {
+                IsPlaying = await js.InvokeAsync<bool>("stop");
+
+            }
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        IsPreparing = false;
+        StateHasChanged();
+    }
+
+
+
+    async void Submit()
+    {
+        try
+        {
+            IsPreparing = true;
+            if (string.IsNullOrWhiteSpace(TextTrans)) throw new Exception("Text Can not by empty");
+            TransData = new BLL.Sql.ViewModels.TransData
+            {
+                TransText = new BLL.Sql.Models.TransText
+                {
+                    Text = TextTrans,
+                    Dialect = BLL.Enum.Dialect.Hybrid
+                },
+                AudioFile = new BLL.Sql.ViewModels.AudioFile
+                {
+                    ID = ModelAudioFile.ID
+                },
+                TypePost = BLL.Enum.TypePost.Text
+            };
+            Token = await js.InvokeAsync<string>("wasmHelper.getAccessToken");
+            var response = await new BLL.Services.HttpExtension<BLL.Sql.ViewModels.TransData>().PostReturnStatusCodeAndString("TransDatas", TransData, Token);
+            nav.NavigateTo($"/StatusPage/Speech To Text/{response.statusCode == System.Net.HttpStatusCode.OK}");
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        IsPreparing = false;
+        StateHasChanged();
+    }
+    async void Skip()
+    {
+        try
+        {
+            IsPreparing = true;
+            TransData = new BLL.Sql.ViewModels.TransData
+            {
+                AudioFile = new BLL.Sql.ViewModels.AudioFile
+                {
+                    ID = ModelAudioFile.ID,
+                    Status = BLL.Enum.Status.Rejected,
+                },
+                TypePost = BLL.Enum.TypePost.Text
+            };
+            Token = await js.InvokeAsync<string>("wasmHelper.getAccessToken");
+            var response = await new BLL.Services.HttpExtension<BLL.Sql.ViewModels.TransData>().PostReturnStatusCodeAndString("TransDatas", TransData, Token);
+            if (IsPlaying)
+                Stop();
+            InitializVariable();
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeAsync<string>("ShowAlert", ex.ToString());
+        }
+        IsPreparing = false;
+        StateHasChanged();
+    }
+
+}

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:CustomControl="clr-namespace:SpeechRecg.Mobile.CustomControl"
+             xmlns:XFMaterial="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:Converter="clr-namespace:SpeechRecg.Mobile.Converter"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="SpeechRecg.Mobile.Pages.RegisterPage">
+    <ContentPage.Resources>
+        <ResourceDictionary >
+            <Converter:StringNullOrEmptyBoolConverter x:Key="IsEmptyString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0">
+            <ScrollView>
+                <StackLayout Margin="0" Padding="0" 
+                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid Margin="0" Padding="0">
+                        <Image Source="Gradient.xml" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                        <StackLayout Margin="0" Padding="20,0" Spacing="0"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout Margin="0" Padding="0,40,0,0" Spacing="10" Orientation="Vertical">
+                                <Image Source="Logo" HeightRequest="64" WidthRequest="64" HorizontalOptions="StartAndExpand"/>
+                                <Label Margin="10,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Welcome To" TextColor="#537CAF" 
+                                                  FontFamily="{StaticResource SegoeUI_Regular}" FontSize="Subtitle"/>
+                                            <Span Text="&#x0a;"/>
+                                            <Span Text="Data Collection System" TextColor="White"                                                  
+                                                  FontFamily="{StaticResource SegoeUI_Bold}" FontSize="Title"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            <Image Source="box_blue" HeightRequest="128" WidthRequest="128"
+                       HorizontalOptions="EndAndExpand" Margin="0,0,0,10"/>
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Margin="0" Padding="20,10" Spacing="10" Orientation="Vertical"                                 
+                         HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
+                        <Label Text="REGISTER" 
+                               FontFamily="{StaticResource SegoeUI_Black}"
+                               TextColor="#005297" FontSize="Title"/>
+                        <StackLayout Margin="0" Padding="0" Spacing="30">
+                            <XFMaterial:MaterialTextField LeadingIcon="user" Margin="0" Padding="0"
+                                                HelperTextFontFamily="{StaticResource SegoeUI_Regular}"
+                                                PlaceholderFontFamily="{StaticResource SegoeUI_Regular}"                                       
+                                                TextFontFamily="{StaticResource SegoeUI_Regular}"
+                                                UnderlineColor="#707070" AlwaysShowUnderline="True"
+                                                Placeholder="USERNAME" BackgroundColor="Transparent"
+                                                PlaceholderColor="#DBDBDB"
+                                                LeadingIconTintColor="#DBDBDB"
+                                                ErrorText="{Binding ErrorText}" InputType="Email"                                                          
+                                                TintColor="#0E3580"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                Text="{Binding InfoUser.Email}">
+                                <XFMaterial:MaterialTextField.Triggers>
+                                    <DataTrigger TargetType="XFMaterial:MaterialTextField" Binding="{Binding ErrorText, Converter={StaticResource IsEmptyString}}" Value="False">
+                                        <Setter Property="HasError" Value="False"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="XFMaterial:MaterialTextField" Binding="{Binding ErrorText, Converter={StaticResource IsEmptyString}}" Value="True">
+                                        <Setter Property="HasError" Value="True"/>
+                                    </DataTrigger>
+                                </XFMaterial:MaterialTextField.Triggers>
+                            </XFMaterial:MaterialTextField>
+                            <StackLayout Margin="0" Padding="0" Spacing="10" Orientation="Vertical"
+                             HorizontalOptions="FillAndExpand">
+                                <Label Text="DATE OF BIRTHDAY"
+                                       FontFamily="{StaticResource SegoeUI_SemiBold}"
+                                       TextColor="#DBDBDB" FontAttributes="Bold" FontSize="Subtitle"/>
+                                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="5"
+                                     HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                    <Frame Margin="0" Padding="0" CornerRadius="5"
+                                           HorizontalOptions="Start" BackgroundColor="#EFEEEC">
+                                        <CustomControl:CustomPicker ItemsSource="{Binding Days}" x:Name="DayPicker"/>
+                                    </Frame>
+                                    <Frame Margin="0" Padding="0" CornerRadius="5" BackgroundColor="#EFEEEC"
+                                           HorizontalOptions="FillAndExpand">
+                                        <CustomControl:CustomPicker ItemsSource="{Binding Months}" x:Name="MonthPicker"/>
+                                    </Frame>
+                                    <Frame Margin="0" Padding="0" CornerRadius="5" BackgroundColor="#EFEEEC"
+                                           HorizontalOptions="End">
+                                        <CustomControl:CustomPicker ItemsSource="{Binding Years}" x:Name="YearPicker"/>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Margin="0" Padding="0" Spacing="10" Orientation="Vertical"
+                             HorizontalOptions="FillAndExpand">
+                                <Label Text="GENDER"
+                                       FontFamily="{StaticResource SegoeUI_SemiBold}" TextColor="#DBDBDB" FontAttributes="Bold" FontSize="Subtitle"/>
+                                <StackLayout Orientation="Horizontal" 
+                                             Margin="0" Padding="0" Spacing="70" 
+                                             HorizontalOptions="CenterAndExpand">
+                                    <ImageButton Source="GrilGeneder_unactive" 
+                                                 HorizontalOptions="Start" VerticalOptions="Start"
+                                                HeightRequest="80" WidthRequest="80" CornerRadius="40"
+                                                BackgroundColor="Transparent" 
+                                                x:Name="GirlButton" Clicked="SetGenderFemale"/>
+                                    <ImageButton Source="YoungGeneder_unactive" 
+                                                 HorizontalOptions="Start" VerticalOptions="Start"
+                                                HeightRequest="80" WidthRequest="80" CornerRadius="40"
+                                                BackgroundColor="Transparent"
+                                                x:Name="BoyButton" Clicked="SetGenderMale"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Margin="0" HorizontalOptions="FillAndExpand">
+                                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}"
+                                           HorizontalOptions="Start" VerticalOptions="Center"
+                                           HeightRequest="32" WidthRequest="32"/>
+                                <Button HorizontalOptions="FillAndExpand" Margin="20,10"
+                                    CornerRadius="5" Text="REGISTER"
+                                    FontFamily="{StaticResource SegoeUI_SemiBold}"
+                                    TextColor="White" BackgroundColor="#008AFC"
+                                    Clicked="RegisterButton">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding IsBusy}" Value="True">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Margin="0" Padding="0" Spacing="0" Orientation="Horizontal" BackgroundColor="Transparent"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Button Text="LOGIN" FontFamily="{StaticResource SegoeUI_Regular}"
+                            TextColor="White" HorizontalOptions="EndAndExpand"
+                        BackgroundColor="Transparent" Padding="0" Margin="0" Clicked="OpenLoginPage"/>
+                <Button Text="REGISTER" FontFamily="{StaticResource SegoeUI_Regular}"
+                            TextColor="White" HorizontalOptions="End"
+                        BackgroundColor="Transparent" Padding="0" Margin="0"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
